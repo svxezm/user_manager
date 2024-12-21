@@ -1,0 +1,43 @@
+@use 'config/reset';
+@use 'config/variables' as *;
+
+body {
+  color: $text-color;
+  background-color: $background-color;
+}
+
+.container {
+  max-width: $breakpoint;
+  width: 100%;
+  margin: auto auto;
+  margin-top: 4em;
+}
+
+h1 {
+  color: $text-color;
+  margin-bottom: 0.5em;
+}
+
+form {
+  .input-area {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5em;
+
+    input {
+      padding: 0.5em;
+      border: solid 1px $input-border-color;
+      border-radius: 8px;
+    }
+  }
+
+  button {
+    background-color: $primary-color;
+    color: $text-color;
+    padding: 0.8em;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 1.0em;
+    font-weight: bold;
+  }
+}
