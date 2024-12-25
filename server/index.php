@@ -1,9 +1,6 @@
 <?php
 session_start();
 require_once 'includes/config.php';
-
-$_SESSION['name'] = 'Liz';
-$_SESSION['browser'] = 'Firefox';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +15,11 @@ $_SESSION['browser'] = 'Firefox';
         <form action="enter.php" method="POST">
             <div class="input-area">
                 <label for="name">Nome</label>
-                <input id="name" type="text" name="username" required>
+                <input id="name" type="text" name="login-name" required>
             </div>
             <div class="input-area">
                 <label for="password">Senha</label>
-                <input id="password" type="password" name="password" required>
+                <input id="password" type="password" name="login-password" required>
             </div>
             <button type="submit">Entrar</button>
         </form>
