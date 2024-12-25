@@ -28,10 +28,14 @@ form {
     flex-direction: column;
     margin-bottom: 0.5em;
 
-    input {
+    input, select {
       padding: 0.5em;
       border: solid 1px $input-border-color;
       border-radius: 8px;
+    }
+
+    select {
+      background-color: #fff;
     }
   }
 
