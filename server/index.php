@@ -17,14 +17,14 @@ $_SESSION['browser'] = 'Firefox';
         <h1>Login</h1>
         <form action="enter.php" method="POST">
             <div class="input-area">
-                <label for="name">Name</label>
+                <label for="name">Nome</label>
                 <input id="name" type="text" name="username" required>
             </div>
             <div class="input-area">
-                <label for="password">Password</label>
+                <label for="password">Senha</label>
                 <input id="password" type="password" name="password" required>
             </div>
-            <button type="submit">Enter</button>
+            <button type="submit">Entrar</button>
         </form>
     </div>
 </body>

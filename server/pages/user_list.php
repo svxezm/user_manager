@@ -21,39 +21,39 @@ $results = $db->query('SELECT * FROM users');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Manager</title>
+    <title>Gerenciador de usuários</title>
     <link rel="stylesheet" href="<?php echo STYLES_URL ?>/user_list.css">
     <script src="https://kit.fontawesome.com/6c1c375b44.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
         <section class="user-manager">
-            <h1 class="user-manager__title">User Manager</h1>
+            <h1 class="user-manager__title">Gerenciador de usuários</h1>
             <div class="user-manager__content">
                 <form action="../add_user.php" method="POST">
                     <div class="input-area">
-                        <label for="name">Name</label>
-                        <input id="name" type="text" name="name" minlength="3" placeholder="Name" required>
+                        <label for="name">Nome</label>
+                        <input id="name" type="text" name="name" minlength="3" placeholder="Nome" required>
                     </div>
                     <div class="input-area">
                         <label for="email">Email</label>
                         <input id="email" type="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="input-area">
-                        <label for="password">Password</label>
-                        <input id="password" type="text" name="password" minlength="5" placeholder="Password" required>
+                        <label for="password">Senha</label>
+                        <input id="password" type="text" name="password" minlength="5" placeholder="Senha" required>
                     </div>
-                    <button type="submit">Add User</button>
+                    <button type="submit">Adicionar Usuário</button>
                 </form>
                 <div class="users">
-                    <h2 class="users__title">User List</h2>
+                    <h2 class="users__title">Lista de usuários</h2>
                     <div class="users__content">
                         <div class="users__headers">
                             <ul>
                                 <li class="users__headers__id">id</li>
-                                <li class="users__headers__name">name</li>
+                                <li class="users__headers__name">nome</li>
                                 <li class="users__headers__email">email</li>
-                                <li class="users__headers__password">password</li>
+                                <li class="users__headers__password">senha</li>
                                 <li class="users__headers__delete"></li>
                             </ul>
                         </div>
@@ -84,7 +84,7 @@ $results = $db->query('SELECT * FROM users');
                 </div>
             </div>
         </section>
-        <a class="logout" href="../index.php">Log out</a>
+        <a class="logout" href="../index.php">Sair</a>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="<?php echo SCRIPTS_URL ?>/user_list.min.js"></script>
