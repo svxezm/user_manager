@@ -3,5 +3,5 @@ CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     password TEXT NOT NULL,
-    picture TEXT NOT NULL
+    role TEXT NOT NULL
 );
