@@ -45,8 +45,8 @@ $results = $db->query('SELECT * FROM users');
                         <input id="password" type="text" name="password" minlength="5" placeholder="123" required>
                     </div>
                     <div class="input-area">
-                        <label for="password">Cargo</label>
-                        <input id="password" type="text" name="role" placeholder="usuario" required>
+                        <label for="role">Cargo</label>
+                        <input id="role" type="text" name="role" placeholder="usuario" required>
                     </div>
                     <button type="submit">Adicionar Usuário</button>
                 </form>
