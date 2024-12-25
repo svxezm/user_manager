@@ -5,7 +5,7 @@ $db = connectDb();
 
 session_start();
 
-if (empty($_SESSION)) {
+if (empty($_SESSION['name'])) {
     header('Location: ../index.php');
     exit;
 }
@@ -76,7 +76,7 @@ $results = $db->query('SELECT * FROM users');
                                         <?php echo htmlspecialchars($row['email']); ?>
                                     </li>
                                     <li class="users__data__password">
-                                        <?php echo $_COOKIE['role'] == 'admin' ?  htmlspecialchars($row['password']) : '*****'; ?>
+                                        <?php echo $_SESSION['role'] === 'admin' ? htmlspecialchars($row['password']) : '*****'; ?>
                                     </li>
                                     <li class="users__data__email">
                                         <?php echo htmlspecialchars($row['role']); ?>
