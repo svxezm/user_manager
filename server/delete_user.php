@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Start output buffering
 require_once 'includes/db.php';
 $db = connectDb();
 
@@ -17,5 +18,5 @@ if (!$stmt->execute()) {
 
 // Redirect back to the main page
 header('Location: pages/user_list.php');
-exit;
+ob_end_flush(); // Ends output buffering
 ?>
