@@ -16,6 +16,6 @@ if (!$stmt->execute()) {
 }
 
 // Redirect back to the main page
-header('Location: index.php');
+header('Location: pages/user_list.php');
 exit;
 ?>
