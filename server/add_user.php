@@ -15,6 +15,8 @@ if (!empty($name) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($passwo
     $stmt->bindParam(':name', filter_var($name, FILTER_SANITIZE_STRING));
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $hashedPassword);
+} else if (strlen(filter_var($name), FILTER_VALIDATE_STRING) < 3) {
+    die("Name $name is too short. Must contain at least 3 characters.");
 } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     die("$email is not a valid email format");
 } else {
@@ -22,7 +24,7 @@ if (!empty($name) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($passwo
 }
 
 if ($stmt->execute()) {
-    header('Location: pages/users_list.php');
+    header('Location: pages/user_list.php');
     exit;
 } else {
     die('Error adding user: ' . $db->lastErrorMessage());
