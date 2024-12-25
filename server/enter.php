@@ -2,13 +2,19 @@
 require_once 'includes/db.php';
 $db = connectDb();
 
-$query = $db->prepare('SELECT name, password FROM users WHERE name = :name');
+session_start();
+
+$_SESSION['name'] = $_POST['login-name'];
+
+$query = $db->prepare('SELECT name, password, role FROM users WHERE name = :name');
 $query->bindValue(':name', $_POST['login-name'] ?? '');
 $result = $query->execute();
 
 $userData = $result->fetchArray(SQLITE3_ASSOC);
 $storedName = $userData['name'] ?? '';
 $storedPassword = $userData['password'] ?? '';
+
+$_SESSION['role'] = $userData['role'] ?? '';
 
 $inputName = $_POST['login-name'] ?? '';
 $inputPassword = $_POST['login-password'] ?? '';
