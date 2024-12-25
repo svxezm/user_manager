@@ -1,38 +1,34 @@
 <?php
+ob_start();
 require_once 'includes/db.php';
-$db = connectDb();
 
 // Get input values
-$name = filter_var($_POST['name'], FILTER_SANITIZE_STRING) ?? '';
-$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) ?? '';
-$password = filter_var($_POST['password'], FILTER_SANITIZE_STRING) ?? '';
-$role = filter_var($_POST['role'], FILTER_SANITIZE_STRING) ?? '';
+$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
+$role = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_SPECIAL_CHARS);
+
+if (!$name || !$email || !$password || !$role) {
+    die("Invalid input!");
+}
 
 // Insert into database
-if (!empty($name) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($password)) {
+try {
+    $db = connectDb();
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $filteredName = filter_var($name, FILTER_SANITIZE_SPECIAL_CHARS);
 
     $stmt = $db->prepare('INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, :role)');
-    $stmt->bindParam(':name', filter_var($name, FILTER_SANITIZE_STRING));
+    $stmt->bindParam(':name', $filteredName);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $hashedPassword);
     $stmt->bindParam(':role', $role);
-} else if (strlen(filter_var($name), FILTER_VALIDATE_STRING) < 3) {
-    die("Name $name is too short. Must contain at least 3 characters.");
-} else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    die("$email is not a valid email format");
-} else {
-    die("Unsufficient data");
+    $stmt->execute();
+
+    header("Location: pages/user_list.php");
+} catch (PDOException $e) {
+    echo 'Error: ' . $e->getMessage();
 }
 
-if ($stmt->execute()) {
-    header('Location: pages/user_list.php');
-    exit;
-} else {
-    die('Error adding user: ' . $db->lastErrorMessage());
-}
-
-// Redirect back to the main page
-header('Location: index.php');
-exit;
+ob_end_flush();
 ?>
