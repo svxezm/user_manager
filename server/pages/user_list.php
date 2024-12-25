@@ -46,7 +46,10 @@ $results = $db->query('SELECT * FROM users');
                     </div>
                     <div class="input-area">
                         <label for="role">Cargo</label>
-                        <input id="role" type="text" name="role" placeholder="usuario" required>
+                        <select id="role" name="role" required>
+                            <option value="usuario">usuário</option>
+                            <option value="admin">admin</option>
+                        </select>
                     </div>
                     <button type="submit">Adicionar Usuário</button>
                 </form>
