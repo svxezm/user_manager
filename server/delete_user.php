@@ -12,7 +12,7 @@ $stmt->bindParam(':id', $id);
 if (!$stmt->execute()) {
     die('Error adding user: ' . implode(', ', $stmt->errorInfo()));
 } else {
-    echo 'User added successfully';
+    echo 'User deleted successfully';
 }
 
 // Redirect back to the main page
