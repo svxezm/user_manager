@@ -5,13 +5,14 @@ $db = connectDb();
 
 session_start();
 
-if (empty($_SESSION['name'])) {
+if (empty($_SESSION)) {
     header('Location: ../index.php');
     exit;
 }
 
 setcookie('user', $_SESSION['name'], time() + (86400 * 30), '/');
-setcookie('today', date('l jS \of F Y h:i:s A'), time() + (86400 * 30), '/');
+setcookie('role', $_SESSION['role'], time() + (86400 * 30), '/');
+//setcookie('today', date('l jS \of F Y h:i:s A'), time() + (86400 * 30), '/');
 
 // Fetch all users
 $results = $db->query('SELECT * FROM users');
@@ -33,15 +34,19 @@ $results = $db->query('SELECT * FROM users');
                 <form action="../add_user.php" method="POST">
                     <div class="input-area">
                         <label for="name">Nome</label>
-                        <input id="name" type="text" name="name" minlength="3" placeholder="Nome" required>
+                        <input id="name" type="text" name="name" minlength="3" placeholder="usuario" required>
                     </div>
                     <div class="input-area">
                         <label for="email">Email</label>
-                        <input id="email" type="email" name="email" placeholder="Email" required>
+                        <input id="email" type="email" name="email" placeholder="usuario@gmail.com" required>
                     </div>
                     <div class="input-area">
                         <label for="password">Senha</label>
-                        <input id="password" type="text" name="password" minlength="5" placeholder="Senha" required>
+                        <input id="password" type="text" name="password" minlength="5" placeholder="123" required>
+                    </div>
+                    <div class="input-area">
+                        <label for="password">Cargo</label>
+                        <input id="password" type="text" name="role" placeholder="usuario" required>
                     </div>
                     <button type="submit">Adicionar Usuário</button>
                 </form>
@@ -52,8 +57,9 @@ $results = $db->query('SELECT * FROM users');
                             <ul>
                                 <li class="users__headers__id">id</li>
                                 <li class="users__headers__name">nome</li>
-                                <li class="users__headers__email">email</li>
+                                <li class="users__headers__password">email</li>
                                 <li class="users__headers__password">senha</li>
+                                <li class="users__headers__email">cargo</li>
                                 <li class="users__headers__delete"></li>
                             </ul>
                         </div>
@@ -66,11 +72,14 @@ $results = $db->query('SELECT * FROM users');
                                     <li class="users__data__name">
                                         <?php echo htmlspecialchars($row['name']); ?>
                                     </li>
-                                    <li class="users__data__email">
+                                    <li class="users__data__password">
                                         <?php echo htmlspecialchars($row['email']); ?>
                                     </li>
                                     <li class="users__data__password">
-                                        <?php echo htmlspecialchars($row['password']); ?>
+                                        <?php echo $_COOKIE['role'] == 'admin' ?  htmlspecialchars($row['password']) : '*****'; ?>
+                                    </li>
+                                    <li class="users__data__email">
+                                        <?php echo htmlspecialchars($row['role']); ?>
                                     </li>
                                     <li class="users__data__actions">
                                         <a class="users__data__actions__delete" href="../delete_user.php?id=<?php echo $row['id']; ?>">
