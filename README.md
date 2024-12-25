@@ -38,7 +38,7 @@ npm install
 
 4. Compile Sass
 ```bash
-npm run build
+npx grunt
 ```
 
 5. Run the following command to initialize the database:
