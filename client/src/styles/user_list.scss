@@ -119,3 +119,9 @@ form {
   padding: 1em;
   text-decoration: none;
 }
+
+@media screen and (max-width: $breakpoint) {
+  .container {
+    width: 80%;
+  }
+}
