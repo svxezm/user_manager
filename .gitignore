@@ -1,7 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/sass,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=sass,node
 
-db/database.db
+server/db/
+client/public/
 
 ### Node ###
 # Logs
