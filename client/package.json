@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
+    "grunt": "^1.6.1",
+    "grunt-contrib-sass": "^2.0.0",
+    "grunt-contrib-uglify": "^5.2.2",
+    "grunt-contrib-watch": "^1.1.0",
     "sass": "^1.83.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass --watch --style=compressed public/styles:../public/styles"
+    "grunt": "grunt"
   },
   "author": "",
   "license": "ISC",
