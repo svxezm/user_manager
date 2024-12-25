@@ -81,14 +81,14 @@ form {
   &__headers, &__data {
     ul {
       display: grid;
-      grid-template-columns: 10% 30% 30% 10% 20%;
+      grid-template-columns: 10% 30% 20% 20% 5% 15%;
       align-items: center;
       padding: 0 0.5em;
       margin: 0 0.2em;
 
       li {
         list-style: none;
-        padding: 0.5em 0;
+        padding: 0.5em;
       }
     }
 
