@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: user-manager-php
+    env: docker
+    region: virginia
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        value: sqlite:/var/www/html/db/database.sqlite
