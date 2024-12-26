@@ -28,7 +28,7 @@ This is a user management system I created to practice PHP, SQL and frontend int
 git clone https://github.com/svxezm/user_manager.git
 ```
 
-2. Make sure you have PHP or a web server like Apache or Nginx installed.
+2. Make sure you have PHP or a web server like Apache or Nginx installed. In case you use Apache, ensure your DocumentRoot points to the project root directory.
 
 3. Open the client/ directory and install dependencies
 ```bash
@@ -41,12 +41,25 @@ npm install
 npx grunt
 ```
 
-5. Run the following command to initialize the database:
+5. Outside client/ directory, run the following commands to initialize the database and insert the initial values:
 ```bash
-sqlite3 server/db/database.db < migrations/create_users_table.sql
+sqlite3 server/db/database.db < server/migrations/create_users_table.sql
+php server/seed.php
 ```
 
-6. Now just navigate to `http://localhost/` and you're ready to go!
+6. Now just navigate to `http://localhost/server/index.php` and you're ready to go!
+
+7. Extra: build with Docker
+```bash
+docker build -t user_manager .
+docker run -p 8080:80 user_manager
+```
+In case you need extra permissions, run the following command and try again.
+```bash
+sudo usermod -aG docker $USER
+```
+
+---
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
