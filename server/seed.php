@@ -1,24 +1,40 @@
 <?php
 require_once 'includes/config.php';
 
-$conn = new PDO("sqlite:" . DB_FILE);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$databasePath = DB_FILE;
 
-$query = $conn->prepare("SELECT COUNT(*) FROM users WHERE name = :name");
-$query->execute([':name' => 'admin']);
-$count = $query->fetchColumn();
+if (!file_exists($databasePath)) {
+    // Create new database file
+    $pdo = new PDO('sqlite:' . $databasePath);
 
-if ($count == 0) {
-    $password = password_hash('admin123', PASSWORD_DEFAULT);
-    $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, :role)");
-    $stmt->execute([
-        ':name' => 'admin',
-        ':email' => 'admin@gmail.com',
-        ':password' => $password,
-        ':role' => 'admin'
-    ]);
-    echo "Admin user created.\nname = 'admin'\nemail = 'admin@gmail.com'\npassword = 'admin123'\n";
+    // Define new table schema
+    $createUsersTable = "
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL,
+            role TEXT NOT NULL
+        );
+    ";
+
+    // Execute schema creation
+    $pdo->exec($createUsersTable);
+
+    // Insert default data
+    $stmt = $pdo->prepare("
+        INSERT INTO users (name, email, password, role)
+        VALUES ('admin', 'admin@gmail.com', :password, 'admin');
+    ");
+    $stmt->bindValue(':password', password_hash('admin123', PASSWORD_DEFAULT));
+    $stmt->execute();
+
+    echo 'Database and users table created successffully.';
+
+    $pdo->exec($insertAdminInfo);
+    echo 'Database seeded successffully.';
 } else {
-    echo "Admin user already exists.";
+    $pdo = new PDO('sqlite:' . $databasePath);
+    echo 'Database already exists.';
 }
 ?>
