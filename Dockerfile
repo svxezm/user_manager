@@ -18,6 +18,9 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
 WORKDIR /var/www/html
 COPY server/ /var/www/html
 
+# Create database and set initial data
+RUN php /var/www/html/seed.php
+
 # Fix permissions for Apache
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
