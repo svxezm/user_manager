@@ -47,7 +47,7 @@ sqlite3 server/db/database.db < server/migrations/create_users_table.sql
 php server/seed.php
 ```
 
-6. Now just navigate to `http://localhost/server/index.php` and you're ready to go!
+6. Now just navigate to `http://localhost/server/index.php` and you're ready to go! And remember: the default name is 'admin' and password is 'admin123'.
 
 7. Extra: build with Docker
 ```bash
